@@ -1,5 +1,5 @@
 import { useKeycloak } from "@react-keycloak/web"
-import { isAdmin } from "./api/Helpers"
+import { isAdmin, roleParser } from "./api/Helpers"
 import { useEffect } from "react"
 
 export default function Navbar(){
@@ -43,7 +43,7 @@ export default function Navbar(){
           <ul className="menu menu-horizontal px-1">
             <li><a>{getUsername()}</a></li>
             <li><button className="btn" onClick={handleLogInOut}>{getLogInOutText()}</button></li>
-            <li><button className="btn" onClick={() => console.log(JSON.stringify(keycloak.tokenParsed))}>get</button></li>
+            <li><button className="btn" onClick={() => console.log(roleParser(keycloak))}>get</button></li>
           </ul>
         </div>
       </div>
