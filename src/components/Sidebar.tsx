@@ -25,7 +25,7 @@ export default  function SideBar({setSelected, selected, user, connectWS, client
 
   const refresh = async ()=>{
     if (await roleParser(keycloak).includes("CHAT_MANAGER"))
-      await chatApi.availableChats(keycloak.token, getUsername()).then((res)=>setUserList(res.data))
+      await chatApi.availableChats(keycloak.token, getUsername(),roleParser(keycloak)[0] ).then((res)=>setUserList(res.data))
     else
       await chatApi.fetchUsers(keycloak.token, getUsername()).then((res)=>setUserList(res.data))
   }
@@ -42,7 +42,7 @@ export default  function SideBar({setSelected, selected, user, connectWS, client
         {roleParser(keycloak) && !roleParser(keycloak).includes("CHAT_MANAGER") && <button onClick={addUser}>add chat</button>}
         <button onClick={refresh}>refresh</button>
         {userList.map((usr:any, i:number) => (
-          <ChatItem key={i} name={usr.id} setSelected={setSelected} selected={selected}/>
+          <ChatItem key={i} id={usr.id} status={usr.chatStatus} setSelected={setSelected} selected={selected}/>
         ))}
     </div>
   )

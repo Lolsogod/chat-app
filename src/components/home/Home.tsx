@@ -50,9 +50,10 @@ export default function Home(){
           subscribeById(selected)
       }
       test();
-      
     },[client,selected])
-    
+    useEffect(()=>{
+      console.log(userList)
+    },[userList])
     return(
         <div className="flex home-c">
             <SideBar
@@ -70,6 +71,7 @@ export default function Home(){
                 user={user}
                 messages={messages}
                 setMessages={setMessages}
+                setUserList={setUserList}
             />
         </div>
     )

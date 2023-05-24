@@ -6,7 +6,9 @@ export const chatApi = {
   start,
   fetchUsers,
   messageHistory,
-  availableChats
+  availableChats,
+  reserveChat,
+  getChatInfo,
 }
 
 function getUserExtrasMe(token: any) {
@@ -31,13 +33,29 @@ function fetchUsers(token: any, name: String) {
   })
 }
 
-function availableChats(token: any, name: String) {
-  return instance.get(`/availableChats/${name}`, {
+function availableChats(token: any, name: String, role: String) {
+  return instance.get(`/availableChats/${name}/${role}`,{
     headers: { 'Authorization': bearerAuth(token) }
   })
 }
 function messageHistory(token: any, chatId: String) {
   return instance.get(`/messages/${chatId}`, {
+    headers: { 'Authorization': bearerAuth(token) }
+  })
+}
+
+function getChatInfo(token: any, chatId: String) {
+  return instance.get(`/getChat/${chatId}`, {
+    headers: { 'Authorization': bearerAuth(token) }
+  })
+}
+
+
+// резервы и другие приколы
+
+function reserveChat(token: any, chatId: String, managerId: String) {
+  return instance.post(`/reserveChat`, 
+  {chatId,managerId} ,{
     headers: { 'Authorization': bearerAuth(token) }
   })
 }
