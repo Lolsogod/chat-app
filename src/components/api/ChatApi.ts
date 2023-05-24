@@ -50,7 +50,7 @@ function registerTemp(token: any, name: String) {
   })
 }
 function fetchUsers(token: any) {
-  return instance.get(`/fetchAllUsers/`, {
+  return instance.get(`/fetchAllUsers`, {
     headers: { 'Authorization': bearerAuth(token) }
   })
 }
