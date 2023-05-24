@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getUsername } from "./api/Helpers"
+import { getUsername, roleParser } from "./api/Helpers"
 import { useKeycloak } from "@react-keycloak/web"
 import { chatApi } from "./api/ChatApi"
 
@@ -38,8 +38,16 @@ export default function Input({user, sendMsg, selected, setMessages}: any) {
     useEffect(()=>{
         console.log(chatInfo)
     }, [chatInfo])
-    return (
+    if(roleParser(keycloak) && roleParser(keycloak).includes("USER")){
+      return (
       <div className="mt-4">
+        <input className="w-96 p-2 bg-slate-800 rounded-md mr-4" type="text"
+         value={text} onChange={(e) => setText(e.target.value)} /> 
+         <button className="btn" onClick={sendHandler}>Send</button>
+      </div>)
+    }
+    else if(roleParser(keycloak)){
+      return (<div className="mt-4">
          {chatInfo && chatInfo.chatStatus == "ON_FIRST_LINE" && <><input className="w-96 p-2 bg-slate-800 rounded-md mr-4" type="text"
          value={text} onChange={(e) => setText(e.target.value)} /> 
          <button className="btn" onClick={sendHandler}>Send</button>
@@ -49,8 +57,11 @@ export default function Input({user, sendMsg, selected, setMessages}: any) {
          <button className="btn m-2" onClick={()=>redirectHandler("GUARANTEES_MANAGER")}>GUARANTEES</button>
          <button className="btn m-2" onClick={()=>redirectHandler("CREDIT_MANAGER")}>CREDIT</button></> }
          {chatInfo && chatInfo.chatStatus == "PENDING_ON_FIRST_LINE" &&<button className="btn" onClick={resHandler}>Reserve</button>}
-      </div>
-    )
+        </div>
+        )
+    }
+    else return <span>unauthorized</span>
+    
   }
   /**GUARANTEES_MANAGER,
     EXPENSE_MANAGER,
