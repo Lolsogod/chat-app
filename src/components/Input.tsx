@@ -48,7 +48,7 @@ export default function Input({user, sendMsg, selected, setMessages}: any) {
     }
     else if(roleParser(keycloak)){
       return (<div className="mt-4">
-         {chatInfo && chatInfo.chatStatus == "ON_FIRST_LINE" && <><input className="w-96 p-2 bg-slate-800 rounded-md mr-4" type="text"
+         {chatInfo && chatInfo.chatStatus == "ON_FIRST_LINE" ||  "ON_SECOND_LINE"  && <><input className="w-96 p-2 bg-slate-800 rounded-md mr-4" type="text"
          value={text} onChange={(e) => setText(e.target.value)} /> 
          <button className="btn" onClick={sendHandler}>Send</button>
          <br />
@@ -56,7 +56,7 @@ export default function Input({user, sendMsg, selected, setMessages}: any) {
          <button className="btn m-2" onClick={()=>redirectHandler("FACTORING_MANAGER")}>FACTORING</button>
          <button className="btn m-2" onClick={()=>redirectHandler("GUARANTEES_MANAGER")}>GUARANTEES</button>
          <button className="btn m-2" onClick={()=>redirectHandler("CREDIT_MANAGER")}>CREDIT</button></> }
-         {chatInfo && chatInfo.chatStatus == "PENDING_ON_FIRST_LINE" &&<button className="btn" onClick={resHandler}>Reserve</button>}
+         {chatInfo && chatInfo.chatStatus == "PENDING_ON_FIRST_LINE" || chatInfo.chatStatus == "PENDING_ON_SECOND_LINE"  &&<button className="btn" onClick={resHandler}>Reserve</button>}
         </div>
         )
     }
