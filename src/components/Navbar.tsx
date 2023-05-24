@@ -46,7 +46,7 @@ export default function Navbar(){
           <ul className="menu menu-horizontal px-1">
             <li><a>{getUsername()}</a></li>
             <li><button className="btn" onClick={handleLogInOut}>{getLogInOutText()}</button></li>
-            <li><button className="btn" onClick={() => chatApi.getUserExtrasMe(keycloak.token)}>get</button></li>
+            <li><button className="btn" onClick={() => console.log(JSON.stringify(keycloak.tokenParsed))}>get</button></li>
           </ul>
         </div>
       </div>

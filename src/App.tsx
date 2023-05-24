@@ -4,10 +4,12 @@ import { ReactKeycloakProvider } from '@react-keycloak/web'
 import { chatApi } from './components/api/ChatApi'
 import {
   createBrowserRouter,
+  json,
   RouterProvider,
 } from "react-router-dom";
 import Home from './components/home/Home';
 import Navbar from './components/Navbar';
+import { useEffect } from 'react';
 
 function App() {
   const keycloak = new Keycloak({
@@ -42,7 +44,6 @@ function App() {
     },
   ]);
   
-
   return (
     <ReactKeycloakProvider
       authClient={keycloak}
