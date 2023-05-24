@@ -6,13 +6,16 @@ import { useKeycloak } from "@react-keycloak/web";
 
 export default function SideBar({setSelected, selected, user, connectWS, client, setUser}: any) {
   
+  const getUsername = () => {
+    return keycloak.authenticated && keycloak.tokenParsed && keycloak.tokenParsed.preferred_username
+  }
   
   const { keycloak } = useKeycloak()
   
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState<any>([]);
   
   const addUser = async () =>{
-    await chatApi.registerTemp(keycloak.token ,user)
+    await chatApi.start(keycloak.token ,getUsername())
       .then(() => {
         connectWS()
         refresh()
@@ -20,24 +23,21 @@ export default function SideBar({setSelected, selected, user, connectWS, client,
   }
 
   const refresh = async ()=>{
-    await chatApi.fetchUsers(keycloak.token)
+    await chatApi.fetchUsers(keycloak.token, getUsername())
       .then((res)=>setUserList(res.data))
   }
-  //test
-
   
-    //test-end
   useEffect(()=>{
+    connectWS()
     refresh()
   },[])
   
   return (
     <div className="flex flex-1 flex-col bg-slate-900 p-2 gap-2 overflow-y-scroll">
-      <input type="text" value={user} onChange={(e) => setUser(e.target.value)}></input>
-        <button onClick={addUser}>add user</button>
+        <button onClick={addUser}>add chat</button>
         <button onClick={refresh}>refresh</button>
-        {userList.map((usr, i) => (
-          <ChatItem key={i} name={usr} setSelected={setSelected} selected={selected}/>
+        {userList.map((usr:any, i:number) => (
+          <ChatItem key={i} name={usr.id} setSelected={setSelected} selected={selected}/>
         ))}
     </div>
   )

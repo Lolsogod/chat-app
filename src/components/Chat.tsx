@@ -8,7 +8,10 @@ export default function Chat({user, sendMsg, selected, messages, setMessages}: a
     <div className="flex flex-col chat-c bg-slate-950 p-2 justify-end items-center">
         <Messages 
           user={user}
-          messages={messages}/>
+          messages={messages}
+          setMessages={setMessages}
+          selected={selected}
+          />
         <Input
           sendMsg={sendMsg}
           selected={selected}

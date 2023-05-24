@@ -1,8 +1,5 @@
 import { useKeycloak } from "@react-keycloak/web"
 import { isAdmin } from "./api/Helpers"
-import { chatApi } from "./api/ChatApi"
-import { Link, NavLink } from 'react-router-dom'
-import { Container, Dropdown, Menu } from 'semantic-ui-react'
 import { useEffect } from "react"
 
 export default function Navbar(){

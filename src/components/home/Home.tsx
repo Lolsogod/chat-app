@@ -8,7 +8,7 @@ export default function Home(){
     const URL = 'http://127.0.0.1:9080/chat';
     const [selected, setSelected] = useState('')
     const [client, setClient] = useState<Stomp.Client | null>()
-    const [user, setUser] = useState('John');
+    const [user, setUser] = useState('0');
     const [messages, setMessages] = useState<any>([])
 
     const connectWS = async ()=> {
@@ -19,9 +19,10 @@ export default function Home(){
       }
     
       function sendMsg(from: any, text: any) {
-        client!.send("/app/chat/" + selected, {}, JSON.stringify({
-            fromLogin: from,
-            message: text
+        client!.send("/app/chat" , {}, JSON.stringify({
+            text: text,
+            chatId: selected, 
+            senderId: from,
         }));
       }
 

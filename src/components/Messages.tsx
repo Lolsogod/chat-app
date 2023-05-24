@@ -1,10 +1,17 @@
 import { useEffect } from "react";
 import Message from "./Message";
+import { chatApi } from "./api/ChatApi";
+import { useKeycloak } from "@react-keycloak/web";
 
-export default function Messages({messages, user}:any) {
-  useEffect(()=>{
-    console.log(messages)
-  }, [messages])
+export default function Messages({messages, user, setMessages, selected}:any) {
+  const { keycloak } = useKeycloak()
+  useEffect( ()=>{
+    const fetchData = async () => {
+      //setMessages([...await chatApi.messageHistory(keycloak, selected)])
+      console.log(await chatApi.messageHistory(keycloak.token, selected))
+    }
+    fetchData().catch(console.error);
+  }, [selected])
   return (
     <div className="flex flex-col items-end w-1/2 overflow-y-scroll ">
       {messages.map((message: any, i: number) => (

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
+import { getUsername } from "./api/Helpers"
+import { useKeycloak } from "@react-keycloak/web"
 
 export default function Input({user, sendMsg, selected, setMessages}: any) {
     const [text, setText] = useState('')
-
+    const { keycloak } = useKeycloak()
     const sendHandler = ()=>{
-      sendMsg(user, text)
+      sendMsg(getUsername(keycloak), text)
       setMessages((messages: any) => [...messages, {from: user, message: text}])
       setText('')
     }
