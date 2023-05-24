@@ -9,6 +9,7 @@ export const chatApi = {
   availableChats,
   reserveChat,
   getChatInfo,
+  redirectChat
 }
 
 function getUserExtrasMe(token: any) {
@@ -59,6 +60,14 @@ function reserveChat(token: any, chatId: String, managerId: String) {
     headers: { 'Authorization': bearerAuth(token) }
   })
 }
+
+function redirectChat(token: any, chatId: String, redirectManager: String) {
+  return instance.post(`/redirectChat`, 
+  {chatId,redirectManager} ,{
+    headers: { 'Authorization': bearerAuth(token) }
+  })
+}
+
 
 // -- Axios
 
