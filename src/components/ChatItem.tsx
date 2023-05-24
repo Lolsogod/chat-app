@@ -1,8 +1,9 @@
 
-export default function ChatItem() {
+export default function ChatItem({name, setSelected, selected}:any) {
   return (
-    <div className="p-5 rounded-md hover:bg-slate-950 cursor-pointer">
-        Chat Item
+
+    <div onClick={() => setSelected(name)} className={`p-5 rounded-md hover:bg-slate-950 cursor-pointer ${name==selected && "bg-slate-950"}`}>
+        {name}
     </div>
   )
 }

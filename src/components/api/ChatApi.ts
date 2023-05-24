@@ -54,6 +54,7 @@ function fetchUsers(token: any) {
     headers: { 'Authorization': bearerAuth(token) }
   })
 }
+
 // -- Axios
 
 const instance = axios.create({
