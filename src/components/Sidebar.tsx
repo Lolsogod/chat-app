@@ -24,10 +24,11 @@ export default  function SideBar({setSelected, selected, user, connectWS, client
   }
 
   const refresh = async ()=>{
-    if (await roleParser(keycloak).includes("CHAT_MANAGER"))
-      await chatApi.availableChats(keycloak.token, getUsername(),roleParser(keycloak)[0] ).then((res)=>setUserList(res.data))
-    else
+    if (await roleParser(keycloak).includes("USER"))
       await chatApi.fetchUsers(keycloak.token, getUsername()).then((res)=>setUserList(res.data))
+    else
+      await chatApi.availableChats(keycloak.token, getUsername(),roleParser(keycloak)[0] ).then((res)=>setUserList(res.data))
+      
   }
   
   useEffect(()=>{
@@ -39,7 +40,7 @@ export default  function SideBar({setSelected, selected, user, connectWS, client
   
   return (
     <div className="flex flex-1 flex-col bg-slate-900 p-2 gap-2 overflow-y-scroll">
-        {roleParser(keycloak) && !roleParser(keycloak).includes("CHAT_MANAGER") && <button onClick={addUser}>add chat</button>}
+        {roleParser(keycloak) && roleParser(keycloak).includes("USER") && <button onClick={addUser}>add chat</button>}
         <button onClick={refresh}>refresh</button>
         {userList.map((usr:any, i:number) => (
           <ChatItem key={i} id={usr.id} status={usr.chatStatus} setSelected={setSelected} selected={selected}/>
