@@ -3,7 +3,8 @@ import axios from 'axios'
 export const chatApi = {
   getUserExtrasMe,
   saveUserExtrasMe,
-  registerTemp
+  registerTemp,
+  fetchUsers
 }
 /*
 function getMovies() {
@@ -43,8 +44,15 @@ function saveUserExtrasMe(token: any, userExtra: any) {
     headers: { 'Authorization': bearerAuth(token) }
   })
 }
-function registerTemp( name: String) {
-  return instance.get(`/registration/${name}`, {})
+function registerTemp(token: any, name: String) {
+  return instance.get(`/registration/${name}`, {
+    headers: { 'Authorization': bearerAuth(token) }
+  })
+}
+function fetchUsers(token: any) {
+  return instance.get(`/fetchAllUsers/`, {
+    headers: { 'Authorization': bearerAuth(token) }
+  })
 }
 // -- Axios
 
