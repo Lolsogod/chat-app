@@ -7,8 +7,8 @@ export default function Messages({messages, user, setMessages, selected}:any) {
   const { keycloak } = useKeycloak()
   useEffect( ()=>{
     const fetchData = async () => {
-      setMessages([...(await chatApi.messageHistory(keycloak.token, selected)).data]) 
-      console.log((await chatApi.messageHistory(keycloak.token, selected)).data)
+      if(selected)
+        setMessages([...(await chatApi.messageHistory(keycloak.token, selected)).data]) 
     }
     fetchData().catch(console.error);
   }, [selected])

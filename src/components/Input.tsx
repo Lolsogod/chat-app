@@ -8,7 +8,7 @@ export default function Input({user, sendMsg, selected, setMessages}: any) {
     const { keycloak } = useKeycloak()
     const sendHandler = ()=>{
       sendMsg(getUsername(keycloak), text)
-      setMessages((messages: any) => [...messages, {senderId: getUsername(keycloak), text}])
+      //setMessages((messages: any) => [...messages, {senderId: getUsername(keycloak), text}])
       setText('')
     }
     return (

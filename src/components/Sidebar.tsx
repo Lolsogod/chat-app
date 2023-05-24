@@ -2,9 +2,10 @@ import ChatItem from "./ChatItem";
 import { useEffect, useState } from "react";
 import { chatApi } from "./api/ChatApi";
 import { useKeycloak } from "@react-keycloak/web";
+import { roleParser } from "./api/Helpers";
 
 
-export default function SideBar({setSelected, selected, user, connectWS, client, setUser}: any) {
+export default  function SideBar({setSelected, selected, user, connectWS, client, setUser, userList, setUserList}: any) {
   
   const getUsername = () => {
     return keycloak.authenticated && keycloak.tokenParsed && keycloak.tokenParsed.preferred_username
@@ -12,29 +13,33 @@ export default function SideBar({setSelected, selected, user, connectWS, client,
   
   const { keycloak } = useKeycloak()
   
-  const [userList, setUserList] = useState<any>([]);
+  const [manager, setManager] = useState()
   
   const addUser = async () =>{
     await chatApi.start(keycloak.token ,getUsername())
       .then(() => {
-        connectWS()
+        //connectWS()
         refresh()
       })
   }
 
   const refresh = async ()=>{
-    await chatApi.fetchUsers(keycloak.token, getUsername())
-      .then((res)=>setUserList(res.data))
+    if (await roleParser(keycloak).includes("CHAT_MANAGER"))
+      await chatApi.availableChats(keycloak.token, getUsername()).then((res)=>setUserList(res.data))
+    else
+      await chatApi.fetchUsers(keycloak.token, getUsername()).then((res)=>setUserList(res.data))
   }
   
   useEffect(()=>{
     connectWS()
     refresh()
   },[])
+
+
   
   return (
     <div className="flex flex-1 flex-col bg-slate-900 p-2 gap-2 overflow-y-scroll">
-        <button onClick={addUser}>add chat</button>
+        {roleParser(keycloak) && !roleParser(keycloak).includes("CHAT_MANAGER") && <button onClick={addUser}>add chat</button>}
         <button onClick={refresh}>refresh</button>
         {userList.map((usr:any, i:number) => (
           <ChatItem key={i} name={usr.id} setSelected={setSelected} selected={selected}/>
