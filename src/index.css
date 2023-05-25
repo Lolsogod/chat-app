@@ -108,6 +108,7 @@ a:hover {
 }
 
 .red{
+  text-shadow: 2px 2px #251010;
   color: rgb(239 68 68) !important;
 }
 
