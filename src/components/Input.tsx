@@ -59,7 +59,7 @@ export default function Input({user, sendMsg, selected, setMessages}: any) {
          <input className="w-96 p-2 bg-slate-800 rounded-md m-2" type="text" value={text} onChange={(e) => setText(e.target.value)} /> 
          <button className="btn m-2" onClick={sendHandler}>Send</button>
          <br />
-         <button className="btn m-2 ml-[3.5rem]" onClick={()=>redirectHandler("EXPENSE_MANAGER,")}>EXPENSE</button>
+         <button className="btn m-2 ml-[3.5rem]" onClick={()=>redirectHandler("EXPENSE_MANAGER")}>EXPENSE</button>
          <button className="btn m-2" onClick={()=>redirectHandler("FACTORING_MANAGER")}>FACTORING</button>
          <button className="btn m-2" onClick={()=>redirectHandler("GUARANTEES_MANAGER")}>GUARANTEES</button>
          <button className="btn m-2" onClick={()=>redirectHandler("CREDIT_MANAGER")}>CREDIT</button></> }
