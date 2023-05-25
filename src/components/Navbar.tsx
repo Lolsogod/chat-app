@@ -40,12 +40,12 @@ export default function Navbar(){
     return(
       <div className="navbar bg-slate-950 navb">
         <div className="flex-1">
-          <a className="btn btn-ghost normal-case text-xl">CoolChat</a>
+          <a className="btn btn-ghost normal-case text-xl big-btn ">CoolChat</a>
         </div>
         <div className="flex-none">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-1 big-btn ">
             <li><a>{getUsername()}</a></li>
-            <li><button className="btn" onClick={handleLogInOut}>{getLogInOutText()}</button></li>
+            <li><button className="btn big-btn " onClick={handleLogInOut}>{getLogInOutText()}</button></li>
             {/*<li><button className="btn" onClick={() => console.log(roleParser(keycloak).includes("CHAT_MANAGER"))}>get</button></li>*/}
           </ul>
         </div>

@@ -13,10 +13,11 @@ export default function Messages({messages, user, setMessages, selected}:any) {
     fetchData().catch(console.error);
   }, [selected])
   return (
-    <div className="flex flex-col w-1/2 overflow-y-scroll ">
+    <div className="page flex flex-col w-1/2 overflow-y-scroll">
+    <div className=" sub">
       {messages.map((message: any, i: number) => (
           <Message key={i} message={message} user={user}/>
         ))}
-    </div>
+    </div></div>
   )
 }
