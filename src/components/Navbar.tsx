@@ -43,7 +43,7 @@ export default function Navbar(){
           <ul className="menu menu-horizontal px-1">
             <li><a>{getUsername()}</a></li>
             <li><button className="btn" onClick={handleLogInOut}>{getLogInOutText()}</button></li>
-            <li><button className="btn" onClick={() => console.log(roleParser(keycloak).includes("CHAT_MANAGER"))}>get</button></li>
+            {/*<li><button className="btn" onClick={() => console.log(roleParser(keycloak).includes("CHAT_MANAGER"))}>get</button></li>*/}
           </ul>
         </div>
       </div>

@@ -36,7 +36,13 @@ export default  function SideBar({setSelected, selected, user, connectWS, client
     refresh()
   },[])
 
-
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refresh()
+    }, 2000);
+  
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  }, [])
   
   return (
     <div className="flex flex-1 flex-col bg-slate-900 p-2 gap-2 overflow-y-scroll">

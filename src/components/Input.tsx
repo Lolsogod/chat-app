@@ -22,8 +22,12 @@ export default function Input({user, sendMsg, selected, setMessages}: any) {
       await delay(1000)
       fetchData()
     }
-
+    const closeHandler = async() =>{
+      chatApi.closeChat(keycloak.token, selected, getUsername(keycloak))
+      window.location.reload();
+    }
     const fetchData = async ()=>{
+      if(selected)
        chatApi.getChatInfo(keycloak.token, selected).then((res)=>  setChatInfo(res.data))
      }
 
@@ -35,24 +39,27 @@ export default function Input({user, sendMsg, selected, setMessages}: any) {
     useEffect(()=>{
       fetchData()
     }, [selected])
+
+
     useEffect(()=>{
         console.log(chatInfo)
     }, [chatInfo])
     if(roleParser(keycloak) && roleParser(keycloak).includes("USER")){
       return (
       <div className="mt-4">
-        <input className="w-96 p-2 bg-slate-800 rounded-md mr-4" type="text"
+        {chatInfo  && chatInfo.chatStatus != "CLOSED"  && <><input className="w-96 p-2 bg-slate-800 rounded-md mr-4" type="text"
          value={text} onChange={(e) => setText(e.target.value)} /> 
-         <button className="btn" onClick={sendHandler}>Send</button>
+         <button className="btn" onClick={sendHandler}>Send</button></>}
       </div>)
     }
     else if(roleParser(keycloak)){
       return (<div className="mt-4">
-         {chatInfo && (chatInfo.chatStatus == "ON_FIRST_LINE" || chatInfo.chatStatus == "ON_SECOND_LINE" ) && <><input className="w-96 p-2 bg-slate-800 rounded-md mr-4" type="text"
-         value={text} onChange={(e) => setText(e.target.value)} /> 
+         {chatInfo && (chatInfo.chatStatus == "ON_FIRST_LINE" || chatInfo.chatStatus == "ON_SECOND_LINE" ) && <>
+         <button className="btn m-2 bg-red-500" onClick={closeHandler}>Close</button>
+         <input className="w-96 p-2 bg-slate-800 rounded-md mr-4" type="text" value={text} onChange={(e) => setText(e.target.value)} /> 
          <button className="btn" onClick={sendHandler}>Send</button>
          <br />
-         <button className="btn m-2" onClick={()=>redirectHandler("EXPENSE_MANAGER,")}>EXPENSE</button>
+         <button className="btn m-2 ml-12" onClick={()=>redirectHandler("EXPENSE_MANAGER,")}>EXPENSE</button>
          <button className="btn m-2" onClick={()=>redirectHandler("FACTORING_MANAGER")}>FACTORING</button>
          <button className="btn m-2" onClick={()=>redirectHandler("GUARANTEES_MANAGER")}>GUARANTEES</button>
          <button className="btn m-2" onClick={()=>redirectHandler("CREDIT_MANAGER")}>CREDIT</button></> }
