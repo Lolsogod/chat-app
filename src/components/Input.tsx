@@ -55,11 +55,11 @@ export default function Input({user, sendMsg, selected, setMessages}: any) {
     else if(roleParser(keycloak)){
       return (<div className="mt-4">
          {chatInfo && (chatInfo.chatStatus == "ON_FIRST_LINE" || chatInfo.chatStatus == "ON_SECOND_LINE" ) && <>
-         <button className="btn m-2 bg-red-500" onClick={closeHandler}>Close</button>
-         <input className="w-96 p-2 bg-slate-800 rounded-md mr-4" type="text" value={text} onChange={(e) => setText(e.target.value)} /> 
-         <button className="btn" onClick={sendHandler}>Send</button>
+         <button className="btn m-2 btn-error" onClick={closeHandler}>Close</button>
+         <input className="w-96 p-2 bg-slate-800 rounded-md m-2" type="text" value={text} onChange={(e) => setText(e.target.value)} /> 
+         <button className="btn m-2" onClick={sendHandler}>Send</button>
          <br />
-         <button className="btn m-2 ml-12" onClick={()=>redirectHandler("EXPENSE_MANAGER,")}>EXPENSE</button>
+         <button className="btn m-2 ml-[3.5rem]" onClick={()=>redirectHandler("EXPENSE_MANAGER,")}>EXPENSE</button>
          <button className="btn m-2" onClick={()=>redirectHandler("FACTORING_MANAGER")}>FACTORING</button>
          <button className="btn m-2" onClick={()=>redirectHandler("GUARANTEES_MANAGER")}>GUARANTEES</button>
          <button className="btn m-2" onClick={()=>redirectHandler("CREDIT_MANAGER")}>CREDIT</button></> }

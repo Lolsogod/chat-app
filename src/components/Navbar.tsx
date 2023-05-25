@@ -33,7 +33,10 @@ export default function Navbar(){
       const getAdminMenuStyle = () => {
         return keycloak.authenticated && isAdmin(keycloak) ? { "display": "block" } : { "display": "none" }
       }
-    
+    useEffect(()=>{
+      if(!keycloak.token)
+        handleLogInOut()
+    },[])
     return(
       <div className="navbar bg-base-100">
         <div className="flex-1">
