@@ -14,13 +14,62 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #101a2a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+.coolSelect {
+  background: rgb(68,79,164);
+  background: linear-gradient(121deg, rgba(68,79,164,1) 0%, rgba(78,79,161,1) 51%, rgba(156,97,150,1) 100%);
+}
+
+.coolHover:hover {
+  background: rgb(68,79,164);
+}
+
+.btn {
+  background: rgb(68,79,164);
+}
+
+.btn:hover {
+  background: rgb(45, 53, 109);
+}
+
+.btn-error {
+  background: rgb(165, 50, 50);
+  border: 0;
+  color: white;
+}
+
+.btn-error:hover {
+  background: rgb(115, 35, 35);
+  color: white;
+}
+
+.coolHover {
+  transition: 0.4s !important;
+}
+
+.roundCool{
+  border-radius: 15px;
+}
+
+.sideb {
+  border-radius: 15px;
+  margin: 1rem;
+}
+
+.navb {
+  border-radius: 15px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  width:calc(100vw - 2rem);
 }
 
 a {
@@ -42,7 +91,7 @@ h1 {
 }
 
 .home-c{
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 5rem);
 }
 
 .chat-c{
@@ -50,8 +99,8 @@ h1 {
 }
 
 .chat-bubble{
-  background: rgb(99,113,229);
-background: linear-gradient(121deg, rgba(99,113,229,1) 0%, rgba(120,122,224,1) 51%, rgba(206,155,201,1) 100%);
+  background: rgb(68,79,164);
+  background: linear-gradient(121deg, rgba(68,79,164,1) 0%, rgba(78,79,161,1) 51%, rgba(156,97,150,1) 100%);
   /*background-color: #6371E5;*/
   max-width:25rem; 
   color:white;

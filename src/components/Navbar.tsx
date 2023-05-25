@@ -38,7 +38,7 @@ export default function Navbar(){
         handleLogInOut()
     },[])
     return(
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-slate-950 navb">
         <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl">CoolChat</a>
         </div>

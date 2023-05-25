@@ -20,7 +20,7 @@ function App() {
   const initOptions = { pkceMethod: 'S256' }
 
   const loadingComponent = (
-    <div className='text-blue-700'>Loading...</div>
+    <div className='text-blue-700'></div>
   )
 
   const handleOnEvent = async (event: any, error:any) => {
